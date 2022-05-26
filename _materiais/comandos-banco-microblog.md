@@ -4,13 +4,13 @@
 CREATE DATABASE progweb_microblog_seunome CHARACTER SET "utf8mb4";
 
 ## 2) Criar tabela de usuários
-CREATE TABLE usuarios(
-	id SMALLINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(45) NOT NULL,
-	email VARCHAR(40) NOT NULL UNIQUE, -- garante que o e-mail será único
-  	senha VARCHAR(255) NOT NULL,
-	tipo ENUM('admin','editor') NOT NULL
-);
+	CREATE TABLE usuarios(
+		id SMALLINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		nome VARCHAR(45) NOT NULL,
+		email VARCHAR(40) NOT NULL UNIQUE, -- garante que o e-mail será único
+		senha VARCHAR(255) NOT NULL,
+		tipo ENUM('admin','editor') NOT NULL
+	);
 
 ## 3) Criar tabela de posts
 CREATE TABLE posts(
@@ -24,6 +24,6 @@ CREATE TABLE posts(
 );
 
 ## 4) Criar chave estrangeira para relacionamento entre as tabelas
-ALTER TABLE posts 
-  ADD CONSTRAINT fk_posts_usuarios 
-  FOREIGN KEY (usuario_id) REFERENCES usuarios(id); 
+	ALTER TABLE posts 
+	ADD CONSTRAINT fk_posts_usuarios 
+	FOREIGN KEY (usuario_id) REFERENCES usuarios(id); 

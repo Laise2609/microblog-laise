@@ -2,7 +2,7 @@
 $servidor = "localhost"; 
 $usuario = "root";	
 $senha = ""; 
-$banco = ""; 
+$banco = "progweb_microblog_laise"; 
 
 $conexao = mysqli_connect($servidor, $usuario, $senha, $banco);
 
