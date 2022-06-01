@@ -54,6 +54,13 @@ function lerUmUsuario(mysqli $conexao, int $id){
 
 
 // Função verificaSenha: usada em usuario-atualiza.php
+function verificaSenha(string $senhaFormulario, string $senhaBanco){
+    if(password_verify($senhaFormulario, $senhaBanco)){
+        return $senhaBanco; //Mantemos como está (a senhha que já existe)
+    } else {
+        return senhaCodificada($senhaFormulario);
+    }
+}
 
 // fim verificaSenha
 
@@ -63,7 +70,7 @@ function lerUmUsuario(mysqli $conexao, int $id){
 function atualizarUsuario(mysqli $conexao, int $id, string $nome, string $email, string $senha, string $tipo){
     $sql = "UPDATE usuarios SET nome = '$nome', email = '$email', senha = '$senha', tipo = '$tipo' WHERE id = $id";
 
-    mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+    mysqli_query($conexao, $sql) or die(mysqli_error($conexao));    
 }
 // fim atualizarUsuario
 
