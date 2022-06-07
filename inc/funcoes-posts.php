@@ -11,8 +11,16 @@ function inserirPost(mysqli $conexao, string $titulo, string $texto, string $res
 
 
 /* Usada em posts.php */
-function lerPosts(mysqli $conexao):array {
-    $sql = "";
+function lerPosts(mysqli $conexao, int $idUsuarioLogado, string $tipoUsuarioLogado):array {
+    //se o tipo de usuário for admin
+    if ($tipoUsuarioLogado == 'admin') {
+        //SQL traga todos os posts (de qualquer um)
+        $sql = "SELECT posts.id, posts.titulo, posts.data, usuarios.nome AS autor FROM posts INNER JOIN usuarios 
+        ON posts.usuario_id = usuarios.id ORDER BY data DESC";
+    } else {
+        //SQL traga os posts do editor
+        $sql = "SELECT id, titulo, data FROM posts WHERE usuario_id = $idUsuarioLogado ORDER BY data DESC";
+    }
 
     $resultado = mysqli_query($conexao,$sql) or die(mysqli_error($conexao));
     $posts = [];
@@ -24,7 +32,7 @@ function lerPosts(mysqli $conexao):array {
 
 
 /* Usada em post-atualiza.php */
-function lerUmPost(mysqli $conexao):array {    
+function lerUmPost(mysqli $conexao):array { 
     $sql = "";
 
 	$resultado = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
@@ -88,7 +96,7 @@ function formataData(){
 
 
 
-/*** Funções para a área PÚBLICA do site ***/
+/***Funções para a área PÚBLICA do site ***/
 
 /* Usada em index.php */
 function lerTodosOsPosts(mysqli $conexao):array {
