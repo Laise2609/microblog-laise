@@ -9,7 +9,7 @@ if(isset($_POST['inserir'])){
 
   //UPLOAD DE IMAGEM
   $imagem = $_FILES['imagem'];
-}
+
 
 //Obtendo e enviando dados
 $imagem = $_FILES['imagem'];
@@ -21,6 +21,7 @@ upload($imagem);
 inserirPost($conexao, $titulo, $texto, $resumo, $imagem['name'], $_SESSION['id']);
 
 header("location:posts.php");
+}
 ?>
        
   <div class="row">
