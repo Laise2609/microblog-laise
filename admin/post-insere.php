@@ -10,17 +10,16 @@ if(isset($_POST['inserir'])){
   //UPLOAD DE IMAGEM
   $imagem = $_FILES['imagem'];
 
+  //Obtendo e enviando dados
+  $imagem = $_FILES['imagem'];
 
-//Obtendo e enviando dados
-$imagem = $_FILES['imagem'];
+  //Função upload
+  upload($imagem);
 
-//Função upload
-upload($imagem);
+  //Função inserir post
+  inserirPost($conexao, $titulo, $texto, $resumo, $imagem['name'], $_SESSION['id']);
 
-//Função inserir post
-inserirPost($conexao, $titulo, $texto, $resumo, $imagem['name'], $_SESSION['id']);
-
-header("location:posts.php");
+  header("location:posts.php");
 }
 ?>
        
