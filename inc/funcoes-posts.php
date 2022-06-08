@@ -32,9 +32,14 @@ function lerPosts(mysqli $conexao, int $idUsuarioLogado, string $tipoUsuarioLoga
 
 
 /* Usada em post-atualiza.php */
-function lerUmPost(mysqli $conexao):array { 
-    $sql = "";
-
+function lerUmPost(mysqli $conexao, int $idPost, int $idUsuarioLogado, string $tipoUsuarioLogado):array { 
+    if($tipoUsuarioLogado == 'admin'){
+        //Se o usuário logado for um admin, então pode carregar os dados de qualquer post de qualquer usuário
+        $sql = "SELECT titulo, texto, resumo, imagem, usuario_id FROM posts WHERE id = $idPost";
+    } else {
+        //Caso contrário, significa que é um usuário editor, portanto só poderá carregar os dados dos seus próprios posts
+        $sql = "SELECT titulo, texto, resumo, imagem, usuario_id FROM posts WHERE id = $idPost AND usuario_id = $idUsuarioLogado";
+    }
 	$resultado = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
     return mysqli_fetch_assoc($resultado); 
 } // fim lerUmPost
@@ -90,8 +95,9 @@ function upload($arquivo){
 
 
 /* Usada em posts.php e páginas da área pública */
-function formataData(){ 
-    
+function formataData(string $data):string{ 
+    //Pegamos uma data informada, transofrmamos em texto (strtotime) e depois aplicamos o formato brasileiro ("dia/mês/ANO")
+    return  date("d/m/Y H:i", strtotime($data));
 } // fim formataData
 
 

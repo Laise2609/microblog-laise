@@ -23,20 +23,24 @@ $quantidade = count($posts);
           <tr>
             <th>Título</th>
             <th>Data</th>
+            <?php if($tipoUsuarioLogado == 'admin'){?>
             <th>Autor</th>
+            <?php } ?>
             <th colspan="2" class="text-center">Operações</th>
           </tr>
         </thead>
       
         <tbody>
-<?php foreach($posts as $post){?>
-          <tr>
+<?php foreach($posts as $post){?>          
+            <tr>
             <td> <?=$post['titulo']?> </td>
-            <td> <?=$post['data']?> </td>
-            <?php if($tipoUsuarioLogado == 'admin'){?>
+            <td> <?=formataData($post['data'])?> </td>
+
+        <?php if($tipoUsuarioLogado == 'admin'){?>
             <td> <?=$post['autor']?> </td>
-            <td class="text-center">
             <?php } ?>
+            <td class="text-center">
+    
               <a class="btn btn-warning btn-sm" 
               href="post-atualiza.php?id=<?=$post['id']?>">
                   Atualizar
