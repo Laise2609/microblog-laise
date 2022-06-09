@@ -74,7 +74,7 @@ function excluirPost(mysqli $conexao, int $idPost, int $idUsuarioLogado, string 
 
 /* Funções utilitárias */
 
-/* Usada em post-insere.php e post-atualiza.php */
+/* Usada em post-insere.php e post-atualiza.php */  
 function upload($arquivo){
     //Definindo os tipos de imagem aceitos
     $tiposValidos = ["image/png", "image/jpeg", "image/gif", "image/svg+xml"];
